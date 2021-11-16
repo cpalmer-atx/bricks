@@ -1,9 +1,15 @@
 const app = require('./app');
+const dotenv = require('dotenv');
+const colors = require('colors');
+
+
+dotenv.config({ path: './config/config.env' });
 
 const PORT = process.env.PORT || 5000;
+const MODE = process.env.MODE;
 
 const server = app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}...`);
+  console.log(`${MODE} server listening on port ${PORT}...`.yellow.bold);
 });
 
 process.on('SIGINT', () => {
