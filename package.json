@@ -1,0 +1,22 @@
+{
+  "name": "bricks",
+  "version": "1.0.0",
+  "description": "First commit",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpalmer-atx/bricks.git"
+  },
+  "author": "Chad Palmer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cpalmer-atx/bricks/issues"
+  },
+  "homepage": "https://github.com/cpalmer-atx/bricks#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
