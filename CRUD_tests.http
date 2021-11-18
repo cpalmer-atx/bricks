@@ -1,3 +1,7 @@
+# The following tests use the Rest Client VSCode extension
+# as an alternative to Postman.  The repo can be found here:
+# https://github.com/Huachao/vscode-restclient
+
 @hostname = localhost
 @port = 5000
 @server = http://{{hostname}}:{{port}}
