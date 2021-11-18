@@ -1,7 +1,6 @@
 const app = require('./app');
 const dotenv = require('dotenv');
 const colors = require('colors');
-// const mongoose = require('mongoose');
 const { mongoConnect, mongoDisconnect } = require('./db');
 
 
