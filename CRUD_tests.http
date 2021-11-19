@@ -4,6 +4,13 @@
 
 @hostname = localhost
 @port = 5000
+
 @server = http://{{hostname}}:{{port}}
 
 GET {{server}}/sanityCheck
+
+###
+
+# Bouncing request off of rebrickable API to test key
+GET https://rebrickable.com/api/v3/lego/colors/
+Authorization: key {{bricks_key}}
