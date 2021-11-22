@@ -29,6 +29,12 @@ Content-Type: application/json
 }
 
 ###
+
+GET {{server}}/api/users
+Content-Type: application/json
+
+###
+
 GET {{server}}/api/users/{{user_id}}
 Content-Type: application/json
 
