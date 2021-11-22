@@ -54,12 +54,40 @@ exports.getUsers = async (req, res, next) => {
       count: users.length, 
       data: users 
     });
-    
+
   } catch (err) {
     console.error(err);
     res.status(400).json({ 
       success: false, 
       msg: 'Something went wrong while fetching users.'
+    });
+  }
+}
+
+// @desc      Update user
+// @route     PUT /api/users/:id
+// @access    Private
+exports.updateUser = async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndUpdate(
+        req.params.id, 
+        req.body,
+        { new: true, runValidators: true }
+      );
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        msg: 'User with given id not found.'
+      });
+    }
+    res.status(200).json({ success: true, data: user });
+    
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({
+      success: false,
+      msg: 'Something went wrong while updating user.'
     });
   }
 }
@@ -84,7 +112,6 @@ exports.deleteUser = async (req, res, next) => {
     res.status(400).json({
       success: false,
       msg: 'Something went wrong while trying to delete user.'
-    });
-    
+    });  
   }
 }
