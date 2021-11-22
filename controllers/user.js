@@ -20,7 +20,7 @@ exports.createUser = async (req, res, next) => {
 }
 
 // @desc      Get user by id
-// @route     POST /api/users/:id
+// @route     GET /api/users/:id
 // @access    Public
 exports.getUser = async (req, res, next) => {
   try {
@@ -29,16 +29,41 @@ exports.getUser = async (req, res, next) => {
     if (!user) {
       return res.status(400).json({
         success: false,
-        msg: `User with id ${req.params.id} not found`
+        msg: 'User with given id not found.'
       });
     }
     res.status(200).json({ success: true, data: user });
-    
+
   } catch (err) {
     console.error(err);
     res.status(400).json({
       success: false,
       msg: 'Something went wrong while fetching user.'
     });
+  }
+}
+
+// @desc      Delete user
+// @route     DELETE /api/users/:id
+// @access    Public
+exports.deleteUser = async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        msg: 'User with given id not found'
+      });
+    }
+    res.status(200).json({ success: true, data: {} });
+
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({
+      success: false,
+      msg: 'Something went wrong while trying to delete user.'
+    });
+    
   }
 }
