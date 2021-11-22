@@ -7,6 +7,7 @@
 
 @server = http://{{hostname}}:{{port}}
 
+### TEST SANITY CHECK AND REBRICKABLE ENDPOINT FIRST
 GET {{server}}/sanityCheck
 
 ###
@@ -15,18 +16,25 @@ GET {{server}}/sanityCheck
 GET https://rebrickable.com/api/v3/lego/colors/
 Authorization: key {{bricks_key}}
 
-### Actual app endpoints below this line
+### BEGIN USER ENDPOINT TESTING
+@user_id = enter user id here to test user endpoints
 
 POST {{server}}/api/users
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "jd@email.com",
+  "name": "Joe Doe",
+  "email": "joe@email.com",
   "password": "12345"
 }
 
 ###
-@user_id = 'enter a user id here'
 GET {{server}}/api/users/{{user_id}}
 Content-Type: application/json
+
+###
+
+DELETE {{server}}/api/users/{{user_id}}
+Content-Type: application/json
+
+### END USER ENDPOINT TESTING
