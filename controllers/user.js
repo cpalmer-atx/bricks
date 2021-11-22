@@ -43,6 +43,27 @@ exports.getUser = async (req, res, next) => {
   }
 }
 
+// @desc      Get all users
+// @route     GET /api/users/
+// @access    Public
+exports.getUsers = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({ 
+      success: true, 
+      count: users.length, 
+      data: users 
+    });
+    
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ 
+      success: false, 
+      msg: 'Something went wrong while fetching users.'
+    });
+  }
+}
+
 // @desc      Delete user
 // @route     DELETE /api/users/:id
 // @access    Public
