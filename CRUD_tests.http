@@ -14,3 +14,19 @@ GET {{server}}/sanityCheck
 # Bouncing request off of rebrickable API to test key
 GET https://rebrickable.com/api/v3/lego/colors/
 Authorization: key {{bricks_key}}
+
+### Actual app endpoints below this line
+
+POST {{server}}/api/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "jd@email.com",
+  "password": "12345"
+}
+
+###
+@user_id = 'enter a user id here'
+GET {{server}}/api/users/{{user_id}}
+Content-Type: application/json
