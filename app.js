@@ -1,4 +1,4 @@
-const startupDebugger = require('debug')('app:startup');
+// const startupDebugger = require('debug')('app:startup');
 const express = require('express');
 const morgan = require('morgan');
 
@@ -12,5 +12,6 @@ if (app.get('env') === 'development') {
 }
 // Routers
 app.use('/sanityCheck', require('./routes/sanity'));
+app.use('/api/users', require('./routes/user'));
 
 module.exports = app;
