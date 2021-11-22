@@ -5,6 +5,10 @@ const ModelSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    brick_count: {
+        type: Number,
+        required: true
+    },
     inventory: [
         {
             part: {
