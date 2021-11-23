@@ -49,7 +49,7 @@ exports.getUser = async (req, res, next) => {
 exports.getUsers = async (req, res, next) => {
   try {
     const users = await User.find();
-    res.status(200).json({ 
+    return res.status(200).json({ 
       success: true, 
       count: users.length, 
       data: users 
@@ -82,7 +82,7 @@ exports.updateUser = async (req, res, next) => {
       });
     }
     res.status(200).json({ success: true, data: user });
-    
+
   } catch (err) {
     console.error(err);
     res.status(400).json({
