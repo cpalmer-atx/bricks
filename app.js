@@ -16,6 +16,7 @@ if (app.get('env') === 'development') {
 // Routers
 app.use('/sanityCheck', require('./routes/sanity'));
 app.use('/api/users', require('./routes/user'));
+app.use('/api/auth', require('./routes/auth'));
 
 module.exports = app;
 
