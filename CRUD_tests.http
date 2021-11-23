@@ -17,14 +17,14 @@ GET https://rebrickable.com/api/v3/lego/colors/
 Authorization: key {{bricks_key}}
 
 ### BEGIN USER ENDPOINT TESTING
-@user_id = enter user id here to test endpoints
+@user_id = ***ENTER USER ID HERE AS REQUIRED***
 
 POST {{server}}/api/users
 Content-Type: application/json
 
 {
-  "name": "Christopher P",
-  "email": "cp@email.com",
+  "name": "test user",
+  "email": "test2@user.com",
   "password": "12345"
 }
 
