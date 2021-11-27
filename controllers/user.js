@@ -38,7 +38,7 @@ exports.createUser = async (req, res, next) => {
     jwt.sign(
       payload, 
       process.env.JWT_TOKEN, 
-      { expiresIn: 360000 },
+      { expiresIn: process.env.TOKEN_EXP },
       (err, token) => {
         if (err) throw err;
         res.json({ token });
