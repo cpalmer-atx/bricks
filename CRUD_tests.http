@@ -25,8 +25,8 @@ POST {{server}}/api/users
 Content-Type: application/json
 
 {
-  "name": "Cynthia Palmer",
-  "email": "cynthia.p.palmer@gmail.com",
+  "name": "John Doe",
+  "email": "john.doe@email.com",
   "password": "12345"
 }
 
@@ -54,5 +54,15 @@ Content-Type: application/json
 
 DELETE {{server}}/api/users/{{user_id}}
 Content-Type: application/json
+
+###
+
+POST {{server}}/api/auth
+Content-Type: application/json
+
+{
+  "email": "john doe",
+  "password": "12345"
+}
 
 ### END USER ENDPOINT TESTING
