@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const ModelSchema = new mongoose.Schema({
     model_number: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     brick_count: {
         type: Number,
@@ -11,9 +12,13 @@ const ModelSchema = new mongoose.Schema({
     },
     inventory: [
         {
-            part: {
+            part_number: {
                 type: String,
                 unique: true,
+                required: true
+            },
+            part_img: {
+                type: String,
                 required: true
             },
             quantity: {
@@ -22,6 +27,10 @@ const ModelSchema = new mongoose.Schema({
             }
         }
     ],
+    model_img: {
+        type: String,
+        required: true
+    },
     quantity: {
         type: Number,
         required: true
