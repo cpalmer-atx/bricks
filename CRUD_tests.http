@@ -16,9 +16,15 @@ GET {{server}}/sanityCheck
 GET https://rebrickable.com/api/v3/lego/colors/
 Authorization: key {{bricks_key}}
 
+###
+GET https://rebrickable.com/api/v3/lego/sets/40334-1
+Authorization: key {{bricks_key}}
+
+
 ### BEGIN USER ENDPOINT TESTING
 
 # @user_id = ***ENTER USER ID HERE AS REQUIRED***
+@user_id = 619d408f4a8bb4256dd68a43
 # @token = ***ADD A VALID TOKEN TO TEST PROTECTED ENDPOINTS***
 
 POST {{server}}/api/users
@@ -66,3 +72,9 @@ Content-Type: application/json
 }
 
 ### END USER ENDPOINT TESTING
+
+### BEGIN REBRICKABLE ENDPOINT TESTING
+
+###
+POST {{server}}/api/bricks/{{user_id}}/40334-1
+Authorization: key {{bricks_key}}
