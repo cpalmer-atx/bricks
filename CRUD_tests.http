@@ -4,28 +4,27 @@
 
 @hostname = localhost
 @port = 5000
-
 @server = http://{{hostname}}:{{port}}
+@user_id = 61b3c4f1552b83e4fe6a62c4
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFiM2M0ZjE1NTJiODNlNGZlNmE2MmM0In0sImlhdCI6MTYzOTE3MjA3OCwiZXhwIjoxNjM5MTcyNDM4fQ.GMLRErWUwZCq8_GwjZCMPHbVsC32eEZsbRldHou9PTI
 
-### TEST SANITY CHECK AND REBRICKABLE ENDPOINT FIRST
+### ~~~ SANITY CHECKS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 GET {{server}}/sanityCheck
 
 ###
 
-# Bouncing request off of rebrickable API to test key
 GET https://rebrickable.com/api/v3/lego/colors/
 Authorization: key {{bricks_key}}
 
-###
-GET https://rebrickable.com/api/v3/lego/sets/40334-1
-Authorization: key {{bricks_key}}
+### ~~~ END SANITY CHECKS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-### BEGIN USER ENDPOINT TESTING
 
-# @user_id = ***ENTER USER ID HERE AS REQUIRED***
-@user_id = 619d408f4a8bb4256dd68a43
-# @token = ***ADD A VALID TOKEN TO TEST PROTECTED ENDPOINTS***
+
+### ~~~ CREATE A NEW USER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Input: { name, email, password } in req.body
+# Output: JWT Token for created user
 
 POST {{server}}/api/users
 Content-Type: application/json
@@ -36,18 +35,18 @@ Content-Type: application/json
   "password": "12345"
 }
 
-###
+### ~~~ GET A USER BY ID ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-GET {{server}}/api/auth
-Content-Type: application/json
-X-Auth-token: {{token}}
-
-###
+# Input: Valid user id
+# Output: User object
 
 GET {{server}}/api/users/{{user_id}}
 Content-Type: application/json
 
-###
+### ~~~ UPDATE A USER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Input: Valid user id
+# Output: Updated user object
 
 PUT {{server}}/api/users/{{user_id}}
 Content-Type: application/json
@@ -56,24 +55,41 @@ Content-Type: application/json
   "email": "updated@email.com"
 }
 
-###
+### ~~~ DELETE A USER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Input: Valid user id
+# Output: { success: true/false, data: empty object }
 
 DELETE {{server}}/api/users/{{user_id}}
 Content-Type: application/json
 
-###
+### ~~~ GET USER WITH JWT TOKEN ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Input: Valid JWT Token
+# Output: User object with password field omitted
+
+GET {{server}}/api/auth
+Content-Type: application/json
+X-Auth-token: {{token}}
+
+### ~~~ LOGIN EXISTING USER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Input: valid user email and password
+# Output: New JWT Token
 
 POST {{server}}/api/auth
 Content-Type: application/json
 
 {
-  "email": "john doe",
+  "email": "john.doe@email.com",
   "password": "12345"
 }
 
-### END USER ENDPOINT TESTING
+### ~~~ END USER ENDPOINT TESTING ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### BEGIN REBRICKABLE ENDPOINT TESTING
+
+
+### ~~~ BEGIN REBRICKABLE ENDPOINT TESTING ~~~~~~~~~~~~~~~~~~~~
 
 ###
 POST {{server}}/api/bricks/{{user_id}}/40334-1
