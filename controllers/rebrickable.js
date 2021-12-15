@@ -40,10 +40,11 @@ exports.addModel = async (req, res, next) => {
       brick_count: model.data.num_parts,
       model_img: model.data.set_img_url,
       quantity: 1,
-      inventory: inv_array
+      parts: inv_array
     }
 
-    const new_model = new Model();
+    await user.model_inventory.push(payload);
+    await user.save();
 
     res.status(200).send({ 
       msg: 'pinged addModel successfully!',
