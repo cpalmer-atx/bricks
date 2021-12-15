@@ -1,5 +1,50 @@
 const mongoose = require('mongoose');
 
+const PartSchema = new mongoose.Schema({
+    part_number: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    part_color: {
+        name: { type: String },
+        rgb: { type: String },
+        transparent: { type: Boolean }
+    },
+    part_img: {
+        type: String
+    },
+    quantity: {
+        type: Number,
+        required: true
+    }
+});
+
+const ModelSchema = new mongoose.Schema({
+    model_name: {
+        type: String,
+        required: true
+    },
+    model_number: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    brick_count: {
+        type: Number,
+        required: true
+    },
+    model_img: {
+        type: String,
+        required: true
+    },
+    quantity: {
+        type: Number,
+        required: true
+    },
+    parts: [ PartSchema ]
+});
+
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -17,51 +62,9 @@ const UserSchema = new mongoose.Schema({
     avatar: {
         type: String
     },
-    model_inventory: [
-        {
-            model_num: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'model'
-            },
-            model_img: {
-                type: String
-            },
-            count: {
-                type: Number,
-                required: true,
-            }
-        }
-    ],
-    model_count: {
-        type: Number,
-        default: 0
-    },
-    brick_inventory: [
-        {
-            part_num: {
-                type: String,
-                unique: true
-            },
-            part_color: {
-                type: String
-            },
-            part_img: {
-                type: String
-            },
-            count: {
-                type: Number,
-                required: true
-            }
-        }
-    ],
-    brick_count: {
-        type: Number,
-        default: 0
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    }
-});
+    model_inventory: [ ModelSchema ],
+    brick_inventory: [ PartSchema ]
+}, 
+{ timestamps: true });
 
 module.exports = mongoose.model('user', UserSchema);
