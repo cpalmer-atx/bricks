@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const PartSchema = new mongoose.Schema({
     part_number: {
         type: String,
-        unique: true,
+        // unique: true,
+        // sparse: true,
         required: true
     },
     part_color: {
@@ -28,7 +29,8 @@ const ModelSchema = new mongoose.Schema({
     model_number: {
         type: String,
         required: true,
-        unique: true
+        // unique: true,
+        // sparse: true
     },
     brick_count: {
         type: Number,
@@ -62,8 +64,20 @@ const UserSchema = new mongoose.Schema({
     avatar: {
         type: String
     },
+    // model_inventory: {
+    //     type: [ ModelSchema ],
+    //     index: { unique: false, sparse: true }
+    //     // default: [],
+    //     // unique: false
+    // },
+    // brick_inventory: {
+    //     type: [ PartSchema ],
+    //     index: { unique: false, sparse: true }
+    //     // default: [],
+    //     // unique: false
+    // }
     model_inventory: [ ModelSchema ],
-    brick_inventory: [ PartSchema ]
+    // brick_inventory: [ PartSchema ]
 }, 
 { timestamps: true });
 
