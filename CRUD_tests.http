@@ -5,8 +5,8 @@
 @hostname = localhost
 @port = 5000
 @server = http://{{hostname}}:{{port}}
-@user_id = 61b3c4f1552b83e4fe6a62c4
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFiM2M0ZjE1NTJiODNlNGZlNmE2MmM0In0sImlhdCI6MTYzOTE3MjA3OCwiZXhwIjoxNjM5MTcyNDM4fQ.GMLRErWUwZCq8_GwjZCMPHbVsC32eEZsbRldHou9PTI
+@user_id = 61bcf8607ea6db0b345bf859
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFiZDA3NWNiNTFhN2EzMmUzODA2NTBhIn0sImlhdCI6MTYzOTc5MDc0NSwiZXhwIjoxNjM5NzkxMTA1fQ.F4NL2xCrKTcIOBpf99BN1xu5t7QuN_20m5qD_nXj-tI
 
 ### ~~~ SANITY CHECKS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 GET {{server}}/sanityCheck
@@ -30,9 +30,9 @@ POST {{server}}/api/users
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "john.doe@email.com",
-  "password": "12345"
+  "name": "another... please",
+  "email": "a@b.com",
+  "password": "54321"
 }
 
 ### ~~~ GET A USER BY ID ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,16 +81,20 @@ POST {{server}}/api/auth
 Content-Type: application/json
 
 {
-  "email": "john.doe@email.com",
-  "password": "12345"
+  "email": "a@b.com",
+  "password": "54321"
 }
 
 ### ~~~ END USER ENDPOINT TESTING ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
 ### ~~~ BEGIN REBRICKABLE ENDPOINT TESTING ~~~~~~~~~~~~~~~~~~~~
 
-###
-POST {{server}}/api/bricks/{{user_id}}/40334-1
+
+### ~~~ ADD LEGO KIT TO USER WITH JWT TOKEN ~~~~~~~~~~~~~~~~~~~
+
+POST {{server}}/api/bricks/40334-1
+X-Auth-token: {{token}}
 Authorization: key {{bricks_key}}
+
+### ~~~ DELETE LEGO KIT FROM USER INVENTORY WITH JWT TOKEN ~~~~
+DELETE {{server}}/api/bricks/40334-1
+X-Auth-token: {{token}}
